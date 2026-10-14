@@ -17,6 +17,9 @@ final class StatusStore: ObservableObject {
     /// Poll interval when the panel / app is live.
     var pollInterval: TimeInterval = 10
 
+    /// Island expanded state (shared with the panel controller for click-through).
+    @Published var islandExpanded: Bool = false
+
     /// When true, skip SSH hosts and only probe this Mac. Persisted.
     @Published var localOnly: Bool = UserDefaults.standard.bool(forKey: "localOnly") {
         didSet {

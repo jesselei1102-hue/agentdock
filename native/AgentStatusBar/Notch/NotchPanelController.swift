@@ -9,6 +9,7 @@ final class NotchPanelController {
     private let store: StatusStore
     /// Room for expanded island + notch offset. Transparent outside the pill/bar.
     private let panelSize = NSSize(width: 400, height: 190)
+    private var hitTimer: Timer?
 
     init(store: StatusStore) {
         self.store = store
@@ -20,6 +21,7 @@ final class NotchPanelController {
         }
         reposition()
         panel?.orderFrontRegardless()
+        startClickThrough()
         store.startPolling()
     }
 
@@ -52,6 +54,23 @@ final class NotchPanelController {
         return p
     }
 
+    /// Only the visible island takes clicks; the rest of the transparent panel passes clicks through.
+    private func startClickThrough() {
+        hitTimer?.invalidate()
+        hitTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
+            MainActor.assumeIsolated { self?.updateClickThrough() }
+        }
+    }
+
+    private func updateClickThrough() {
+        guard let panel else { return }
+        let f = panel.frame
+        let size = store.islandExpanded ? NSSize(width: 368, height: 160) : NSSize(width: 164, height: 50)
+        let active = NSRect(x: f.midX - size.width / 2, y: f.maxY - size.height, width: size.width, height: size.height)
+        let inside = active.contains(NSEvent.mouseLocation)
+        if panel.ignoresMouseEvents == inside { panel.ignoresMouseEvents = !inside }
+    }
+
     private func reposition() {
         guard let panel else { return }
         let screen = NSScreen.main ?? NSScreen.screens.first
@@ -66,10 +85,9 @@ final class NotchPanelController {
 
 private struct NotchIslandHost: View {
     @ObservedObject var store: StatusStore
-    @State private var expanded = false
 
     var body: some View {
-        NotchIslandView(store: store, expanded: $expanded)
+        NotchIslandView(store: store, expanded: $store.islandExpanded)
             .preferredColorScheme(.dark)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(Color.clear)
