@@ -593,8 +593,11 @@ def main() -> None:
         default="json",
         help="Output format (default json for CLI)",
     )
+    ap.add_argument("--local-only", action="store_true", help="Skip SSH hosts; only probe this Mac")
     args = ap.parse_args()
     cfg = load_config(args.config, demo=args.demo)
+    if args.local_only and cfg.get("_hosts"):
+        cfg["_hosts"] = [h for h in cfg["_hosts"] if h["id"] == "local"]
     rows = snapshot(cfg)
     if args.format == "swiftbar":
         print_swiftbar(rows)

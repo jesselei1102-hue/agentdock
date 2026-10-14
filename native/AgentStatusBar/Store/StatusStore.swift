@@ -17,6 +17,14 @@ final class StatusStore: ObservableObject {
     /// Poll interval when the panel / app is live.
     var pollInterval: TimeInterval = 10
 
+    /// When true, skip SSH hosts and only probe this Mac. Persisted.
+    @Published var localOnly: Bool = UserDefaults.standard.bool(forKey: "localOnly") {
+        didSet {
+            UserDefaults.standard.set(localOnly, forKey: "localOnly")
+            refresh()
+        }
+    }
+
     private var timer: AnyCancellable?
 
     init(demo: Bool = true, detectScriptURL: URL? = nil) {
@@ -91,7 +99,7 @@ final class StatusStore: ObservableObject {
         }
         let proc = Process()
         proc.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        proc.arguments = ["python3", script.path, "--format", "json"]
+        proc.arguments = ["python3", script.path, "--format", "json"] + (localOnly ? ["--local-only"] : [])
         let out = Pipe()
         let err = Pipe()
         proc.standardOutput = out

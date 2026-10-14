@@ -23,6 +23,7 @@ struct AgentStatusBarApp: App {
                 appDelegate.attachAndShow(store: store)
             }
             Button("Refresh") { store.refresh() }
+            Toggle("This Mac Only (skip SSH)", isOn: $store.localOnly)
             Divider()
             Button("Quit AgentDock") { NSApp.terminate(nil) }
         } label: {

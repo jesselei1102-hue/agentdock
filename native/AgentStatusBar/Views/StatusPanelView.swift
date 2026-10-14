@@ -24,7 +24,7 @@ struct StatusPanelView: View {
                 Button {
                     onCollapse?()
                 } label: {
-                    Text("收回")
+                    Text("Collapse")
                         .font(.system(size: 11, weight: .semibold))
                         .foregroundStyle(Color.white.opacity(0.85))
                         .padding(.horizontal, 10)
