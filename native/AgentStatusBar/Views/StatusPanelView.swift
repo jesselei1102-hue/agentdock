@@ -22,6 +22,23 @@ struct StatusPanelView: View {
                     .font(.system(size: 9, weight: .regular))
                     .foregroundStyle(Color.white.opacity(0.4))
                 Button {
+                    store.localOnly.toggle()
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: store.localOnly ? "laptopcomputer" : "network")
+                            .font(.system(size: 9, weight: .semibold))
+                        Text(store.localOnly ? "This Mac" : "All Macs")
+                            .font(.system(size: 10, weight: .semibold))
+                    }
+                    .foregroundStyle(Color.white.opacity(store.localOnly ? 0.95 : 0.7))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 5)
+                    .background(Capsule().fill(Color.white.opacity(store.localOnly ? 0.22 : 0.08)))
+                }
+                .buttonStyle(.plain)
+                .help("Toggle SSH hosts on/off")
+                .padding(.leading, 8)
+                Button {
                     onCollapse?()
                 } label: {
                     Text("Collapse")
