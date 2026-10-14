@@ -1,0 +1,22 @@
+# AgentDock config. Location: ~/.config/agentdock/config.yaml (override with AGENTDOCK_CONFIG).
+
+# This Mac. Fill in a label (e.g. "MacBook") to show rows as "Claude (MacBook)".
+# Leave blank to show the agent name alone.
+local:
+  label: ""
+
+# Remote Macs probed read-only over SSH (e.g. via Tailscale). Zero hosts is fine.
+# ssh is a Host alias from ~/.ssh/config. Fill in label yourself (blank = no suffix).
+hosts: []
+#  - id: studio
+#    label: ""
+#    ssh: mac-studio
+#    ssh_opts: "-o BatchMode=yes -o ConnectTimeout=3"   # optional
+
+idle_after_sec: 120     # running -> idle after this many seconds without session writes
+stale_after_sec: 3600   # no process: stale until this age, then offline
+discover: true          # scan every catalog agent on every host
+max_dots: 6             # show the N most active agents
+
+# Extra / overriding catalog entries (same shape as lib/agents.yaml; same id overrides).
+agents: []

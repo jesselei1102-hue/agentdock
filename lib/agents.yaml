@@ -1,0 +1,69 @@
+# AgentDock agent catalog.
+# Each entry is detected on every host (local + remote hosts in config.yaml).
+#   id:               stable runtime id (used in row ids: <id>-<host>)
+#   name:             display name
+#   process_patterns: substrings matched against the full command line (ps/pgrep -f)
+#   session_globs:    files whose newest mtime proves recent activity
+#   note:             optional free text
+# Agents with no session_globs are "process-only" and never show better than idle.
+# Keep values on one line (flow lists) so the no-PyYAML fallback parser can read this file.
+agents:
+  - id: claude
+    name: Claude
+    process_patterns: ["Claude.app/Contents/MacOS/Claude", "/bin/claude"]
+    session_globs: ["~/.claude/projects/*/*.jsonl", "~/Library/Application Support/Claude/local-agent-mode-sessions/*/*/*", "~/Library/Application Support/Claude/local-agent-mode-sessions/*/*/*/*"]
+    note: Claude Code transcripts + Claude desktop Cowork (local-agent-mode) sessions. Desktop IndexedDB is not used, it is rewritten every ~1-2 min even when idle.
+  - id: codex
+    name: Codex
+    process_patterns: ["MacOS/codex", "bin/codex"]
+    session_globs: ["~/.codex/sessions/*/*/*/*.jsonl"]
+    note: Codex app-server may stay alive in the background (optimistic idle).
+  - id: cursor
+    name: Cursor
+    process_patterns: ["cursor-agent "]
+    session_globs: ["~/.cursor/projects/*/agent-transcripts/*", "~/.cursor/projects/*/agent-transcripts/*/*"]
+  - id: agentzero
+    name: Agent Zero
+    process_patterns: ["bin/agentzero"]
+    session_globs: []
+  - id: gemini
+    name: Gemini
+    process_patterns: ["bin/gemini"]
+    session_globs: ["~/.gemini/tmp/*/chats/*.json"]
+  - id: opencode
+    name: OpenCode
+    process_patterns: ["bin/opencode"]
+    session_globs: ["~/.local/share/opencode/storage/session/*/*"]
+  - id: copilot
+    name: Copilot
+    process_patterns: ["bin/copilot "]
+    session_globs: ["~/.copilot/session-state/*"]
+    note: CLI only; the VS Code copilot-runtime helper is intentionally ignored.
+  - id: hermes
+    name: Hermes
+    process_patterns: ["bin/hermes", "hermes-agent", "Hermes.app/Contents/MacOS"]
+    session_globs: ["~/.hermes/sessions/*", "~/.hermes/sessions/*/*"]
+  - id: qoder
+    name: Qoder
+    process_patterns: ["Qoder.app/Contents/MacOS/Qoder", "qodercli", "bin/qoder"]
+    session_globs: ["~/.qoder/*", "~/.qoder/*/*", "~/.qoder-cli/*", "~/.qoder-cli/*/*"]
+  - id: devin
+    name: Devin
+    process_patterns: ["Devin.app/Contents/MacOS/Devin", "bin/devin"]
+    session_globs: ["~/.devin/*", "~/.devin/*/*"]
+  - id: quick
+    name: Amazon Quick
+    process_patterns: ["Amazon Quick.app/Contents/MacOS/Amazon Quick"]
+    session_globs: ["~/Library/Application Support/quickwork/*", "~/Library/Application Support/quickwork/*/*"]
+  - id: goose
+    name: Goose
+    process_patterns: ["bin/goose"]
+    session_globs: ["~/.local/share/goose/sessions/*"]
+  - id: droid
+    name: Droid
+    process_patterns: ["bin/droid"]
+    session_globs: ["~/.factory/sessions/*"]
+  - id: ollama
+    name: Ollama
+    process_patterns: ["ollama serve", "Ollama.app/Contents/MacOS/Ollama"]
+    session_globs: []

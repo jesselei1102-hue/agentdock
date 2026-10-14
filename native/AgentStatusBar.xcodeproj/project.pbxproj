@@ -1,0 +1,341 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000011 /* AgentStatusBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000001 /* AgentStatusBarApp.swift */; };
+		A10000000000000000000012 /* AgentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* AgentStatus.swift */; };
+		A10000000000000000000013 /* HostKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* HostKind.swift */; };
+		A10000000000000000000014 /* AgentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* AgentSnapshot.swift */; };
+		A10000000000000000000015 /* StatusOrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000005 /* StatusOrbView.swift */; };
+		A10000000000000000000016 /* MenuBarGlyphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000006 /* MenuBarGlyphView.swift */; };
+		A10000000000000000000017 /* AgentRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000007 /* AgentRowView.swift */; };
+		A10000000000000000000018 /* HostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000008 /* HostSectionView.swift */; };
+		A10000000000000000000019 /* StatusPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000009 /* StatusPanelView.swift */; };
+		A1000000000000000000001A /* StatusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000A /* StatusStore.swift */; };
+		A1000000000000000000001B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000B /* Assets.xcassets */; };
+
+		A1000000000000000000001C /* NotchIslandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000D /* NotchIslandView.swift */; };
+		A1000000000000000000001D /* NotchPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000E /* NotchPanelController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A10000000000000000000001 /* AgentStatusBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentStatusBarApp.swift; sourceTree = "<group>"; };
+		A10000000000000000000002 /* AgentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentStatus.swift; sourceTree = "<group>"; };
+		A10000000000000000000003 /* HostKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostKind.swift; sourceTree = "<group>"; };
+		A10000000000000000000004 /* AgentSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentSnapshot.swift; sourceTree = "<group>"; };
+		A10000000000000000000005 /* StatusOrbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOrbView.swift; sourceTree = "<group>"; };
+		A10000000000000000000006 /* MenuBarGlyphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarGlyphView.swift; sourceTree = "<group>"; };
+		A10000000000000000000007 /* AgentRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentRowView.swift; sourceTree = "<group>"; };
+		A10000000000000000000008 /* HostSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSectionView.swift; sourceTree = "<group>"; };
+		A10000000000000000000009 /* StatusPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPanelView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000A /* StatusStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStore.swift; sourceTree = "<group>"; };
+		A1000000000000000000000B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000000000000000000000C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A90000000000000000000001 /* AgentStatusBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgentStatusBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+
+		A1000000000000000000000D /* NotchIslandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchIslandView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000E /* NotchPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanelController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A30000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000007 /* AgentStatusBar */,
+				A30000000000000000000002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A30000000000000000000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A90000000000000000000001 /* AgentStatusBar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A30000000000000000000007 /* AgentStatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000001 /* AgentStatusBarApp.swift */,
+				A30000000000000000000003 /* Models */,
+				A30000000000000000000004 /* Views */,
+				A30000000000000000000005 /* Store */,
+				A30000000000000000000008 /* Notch */,
+				A30000000000000000000006 /* Resources */,
+				A1000000000000000000000C /* Info.plist */,
+			);
+			path = AgentStatusBar;
+			sourceTree = "<group>";
+		};
+		A30000000000000000000003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000002 /* AgentStatus.swift */,
+				A10000000000000000000003 /* HostKind.swift */,
+				A10000000000000000000004 /* AgentSnapshot.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A30000000000000000000004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000005 /* StatusOrbView.swift */,
+				A10000000000000000000006 /* MenuBarGlyphView.swift */,
+				A10000000000000000000007 /* AgentRowView.swift */,
+				A10000000000000000000008 /* HostSectionView.swift */,
+				A10000000000000000000009 /* StatusPanelView.swift */,
+				A1000000000000000000000D /* NotchIslandView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A30000000000000000000005 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000000A /* StatusStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		A30000000000000000000006 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000000B /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+
+		A30000000000000000000008 /* Notch */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000000E /* NotchPanelController.swift */,
+			);
+			path = Notch;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000000000000000000001 /* AgentStatusBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A70000000000000000000002 /* Build configuration list for PBXNativeTarget "AgentStatusBar" */;
+			buildPhases = (
+				A40000000000000000000001 /* Sources */,
+				A40000000000000000000003 /* Frameworks */,
+				A40000000000000000000002 /* Resources */,
+				A40000000000000000000004 /* Bundle detector */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AgentStatusBar;
+			productName = AgentStatusBar;
+			productReference = A90000000000000000000001 /* AgentStatusBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A60000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A50000000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A70000000000000000000001 /* Build configuration list for PBXProject "AgentStatusBar" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A30000000000000000000001;
+			productRefGroup = A30000000000000000000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A50000000000000000000001 /* AgentStatusBar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A40000000000000000000004 /* Bundle detector */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../lib/detect.py",
+				"$(SRCROOT)/../lib/agents.yaml",
+			);
+			name = "Bundle detector";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/detect.py",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/agents.yaml",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nDEST=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nmkdir -p \"$DEST\"\ncp \"$SRCROOT/../lib/detect.py\" \"$SRCROOT/../lib/agents.yaml\" \"$DEST/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A40000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000000000000000000001B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A40000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000011 /* AgentStatusBarApp.swift in Sources */,
+				A10000000000000000000012 /* AgentStatus.swift in Sources */,
+				A10000000000000000000013 /* HostKind.swift in Sources */,
+				A10000000000000000000014 /* AgentSnapshot.swift in Sources */,
+				A10000000000000000000015 /* StatusOrbView.swift in Sources */,
+				A10000000000000000000016 /* MenuBarGlyphView.swift in Sources */,
+				A10000000000000000000017 /* AgentRowView.swift in Sources */,
+				A10000000000000000000018 /* HostSectionView.swift in Sources */,
+				A10000000000000000000019 /* StatusPanelView.swift in Sources */,
+				A1000000000000000000001A /* StatusStore.swift in Sources */,
+				A1000000000000000000001C /* NotchIslandView.swift in Sources */,
+				A1000000000000000000001D /* NotchPanelController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A80000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_DYNAMIC_NO_PIC = NO;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A80000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		A80000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AgentStatusBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.agentdock.AgentDock;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A80000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AgentStatusBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.agentdock.AgentDock;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A70000000000000000000001 /* Build configuration list for PBXProject "AgentStatusBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000000000000000000001 /* Debug */,
+				A80000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A70000000000000000000002 /* Build configuration list for PBXNativeTarget "AgentStatusBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000000000000000000003 /* Debug */,
+				A80000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A60000000000000000000001 /* Project object */;
+}

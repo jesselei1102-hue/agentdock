@@ -1,0 +1,10 @@
+build/
+native/build/
+config.yaml
+.DS_Store
+xcuserdata/
+**/xcuserdata/
+*.xcuserstate
+DerivedData/
+__pycache__/
+*.pyc
