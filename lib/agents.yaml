@@ -25,7 +25,8 @@ agents:
   - id: agentzero
     name: Agent Zero
     process_patterns: ["bin/agentzero"]
-    session_globs: []
+    # Workspace comes from `agentzero gui <path>`; traces are written while it works.
+    session_globs: ["{arg:gui}/memory/traces/.staging/*", "{arg:gui}/.agentzero/*", "{arg:gui}/.agentzero/*/*", "{arg:gui}/memory/traces/*", "{arg:gui}/memory/traces/*/*", "{arg:gui}/audit/*", "{arg:gui}/audit/*/*", "{arg:gui}/work/*", "{arg:gui}/work/*/*"]
   - id: gemini
     name: Gemini
     process_patterns: ["bin/gemini"]

@@ -255,7 +255,7 @@ def local_processes(patterns: list[str]) -> list[dict[str, Any]]:
     if shutil.which("pgrep"):
         for pat in patterns:
             # -f full cmdline; -a print pid + command (GNU/BSD variants differ)
-            code, out, _ = _run(["pgrep", "-af", pat], timeout=3)
+            code, out, _ = _run(["pgrep", "-lf" if sys.platform == "darwin" else "-af", pat], timeout=3)
             if code not in (0, 1):
                 continue
             for line in out.splitlines():
@@ -280,7 +280,7 @@ def local_processes(patterns: list[str]) -> list[dict[str, Any]]:
                     if not any(p in line for p in patterns):
                         continue
                 seen.add(pid)
-                found.append({"pid": pid, "cmd": cmd[:120], "host": "local"})
+                found.append({"pid": pid, "cmd": cmd[:400], "host": "local"})
         return found
 
     code, out, _ = _run(["ps", "ax", "-o", "pid=,command="], timeout=3)
@@ -301,7 +301,7 @@ def local_processes(patterns: list[str]) -> list[dict[str, Any]]:
         if any(p in cmd for p in patterns):
             if pid not in seen:
                 seen.add(pid)
-                found.append({"pid": pid, "cmd": cmd[:120], "host": "local"})
+                found.append({"pid": pid, "cmd": cmd[:400], "host": "local"})
     return found
 
 
@@ -343,6 +343,22 @@ def remote_processes(
         cmdstr = parts[1] if len(parts) > 1 else ""
         found.append({"pid": pid, "cmd": cmdstr[:120], "host": host})
     return found, None
+
+
+def _expand_arg_globs(globs: list[str], procs: list[dict[str, Any]]) -> list[str]:
+    """Glob entries like "{arg:gui}/memory/*" take the path after `gui` in each matched command line."""
+    out: list[str] = []
+    for g in globs:
+        m = re.search(r"\{arg:([^}]+)\}", g)
+        if not m:
+            out.append(g)
+            continue
+        flag = m.group(1)
+        for p in procs:
+            mm = re.search(r"(?:^|\s)" + re.escape(flag) + r"\s+(.+?)(?:\s+--|$)", p.get("cmd", ""))
+            if mm:
+                out.append(g.replace(m.group(0), mm.group(1).strip()))
+    return out
 
 
 def newest_mtime_local(globs: list[str]) -> tuple[float | None, str | None]:
@@ -444,6 +460,7 @@ def detect_one(agent: dict[str, Any], host: dict[str, Any], cfg: dict[str, Any],
 
     if not host.get("ssh"):
         procs = local_processes(patterns)
+        globs = _expand_arg_globs(globs, procs)
         mtime, mpath = newest_mtime_local(globs)
     else:
         ssh, opts = host["ssh"], host.get("ssh_opts") or DEFAULT_SSH_OPTS
