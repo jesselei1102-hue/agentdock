@@ -74,8 +74,9 @@ final class StatusStore: ObservableObject {
         lastError = nil
 
         let script = detectScriptURL
+        let localOnly = self.localOnly
         Task.detached(priority: .userInitiated) {
-            let result = StatusStore.runDetect(script: script)
+            let result = StatusStore.runDetect(script: script, localOnly: localOnly)
             await MainActor.run {
                 self.isRefreshing = false
                 switch result {
@@ -93,7 +94,7 @@ final class StatusStore: ObservableObject {
 
     // MARK: - detect.py bridge
 
-    nonisolated private static func runDetect(script: URL?) -> Result<DetectPayload, DetectError> {
+    nonisolated private static func runDetect(script: URL?, localOnly: Bool) -> Result<DetectPayload, DetectError> {
         guard let script, FileManager.default.fileExists(atPath: script.path) else {
             return .failure(DetectError("detect.py not found"))
         }
