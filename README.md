@@ -1,3 +1,5 @@
+<img src="docs/icon.png" width="128" alt="AgentDock icon" align="right">
+
 # AgentDock
 
 **A tiny macOS notch island that shows which of your AI coding agents are actually working, on this Mac and on your other Macs.**
@@ -35,17 +37,31 @@ Agents with neither a process nor session files are hidden. The rest are sorted 
 
 ## Install
 
-Requires macOS 14+, Xcode 15+ and `python3` (system Python is fine; PyYAML is optional).
+Requires macOS 14+ and `python3` (system Python is fine; PyYAML is optional).
+
+**Prebuilt:** download `AgentDock.zip` from [Releases](https://github.com/jesselei1102-hue/agentdock/releases) (or the latest [Actions](https://github.com/jesselei1102-hue/agentdock/actions) build artifact), unzip it and drag **AgentDock.app** into **/Applications**.
+
+**From source** (Xcode 15+):
 
 ```sh
 git clone https://github.com/jesselei1102-hue/agentdock.git
 cd agentdock/native
 xcodebuild -project AgentStatusBar.xcodeproj -scheme AgentStatusBar \
   -configuration Release -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
-open build/Build/Products/Release/AgentStatusBar.app
+ditto build/Build/Products/Release/AgentDock.app /Applications/AgentDock.app
+codesign --force --deep -s - /Applications/AgentDock.app   # ad-hoc sign
 ```
 
-The app is unsigned, so on first launch right-click it and choose **Open**. Every CI build also uploads an unsigned `AgentDock.zip` artifact (see [Actions](https://github.com/jesselei1102-hue/agentdock/actions)).
+The app is unsigned, so on first launch right-click it and choose **Open** (or run `xattr -cr /Applications/AgentDock.app`).
+
+## Open, quit and launch at login
+
+- **Open:** Launchpad, Spotlight (⌘Space → "AgentDock") or Finder → Applications. There is no Dock icon; the app lives in the notch.
+- **Quit:** expand the island and click the **⏻** button in its header, or **right-click** the island → **Quit AgentDock**. The menu bar fallback icon has a Quit item too (it is often hidden behind the notch).
+- **Right-click menu:** This Mac Only, Launch at Login, Refresh, Quit AgentDock.
+- **Launch at login:** turned on automatically the first time AgentDock runs from `/Applications`. Turn it off from the right-click menu or in **System Settings → General → Login Items**. If macOS asks for approval, enable AgentDock there.
+
+To regenerate the app icon, run `swift scripts/make_icon.swift` from the repo root.
 
 `detect.py` and `agents.yaml` are bundled inside the app. To run against a checkout instead, set `AGENTDOCK_DETECT=/path/to/lib/detect.py`.
 

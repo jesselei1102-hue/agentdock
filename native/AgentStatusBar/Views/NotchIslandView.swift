@@ -60,6 +60,7 @@ struct NotchIslandView: View {
                         .transition(.opacity)
                 }
             }
+            .contextMenu { IslandContextMenu(store: store) }
             .animation(.spring(response: 0.32, dampingFraction: 0.88), value: expanded)
         }
         .preferredColorScheme(.dark)

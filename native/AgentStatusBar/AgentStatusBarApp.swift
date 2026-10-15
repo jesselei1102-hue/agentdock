@@ -1,10 +1,13 @@
 import SwiftUI
 import AppKit
+import ServiceManagement
+import os
 
 @main
 struct AgentStatusBarApp: App {
     @StateObject private var store: StatusStore
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    @ObservedObject private var loginItem = LoginItem.shared
 
     init() {
         let env = ProcessInfo.processInfo.environment
@@ -24,6 +27,10 @@ struct AgentStatusBarApp: App {
             }
             Button("Refresh") { store.refresh() }
             Toggle("This Mac Only (skip SSH)", isOn: $store.localOnly)
+            Toggle("Launch at Login", isOn: Binding(
+                get: { loginItem.isEnabled },
+                set: { loginItem.setEnabled($0) }
+            ))
             Divider()
             Button("Quit AgentDock") { NSApp.terminate(nil) }
         } label: {
@@ -48,6 +55,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static var pendingStore: StatusStore?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        LoginItem.shared.registerOnFirstLaunchIfInstalled()
         DispatchQueue.main.async { [weak self] in
             if let store = self?.storeRef ?? AppDelegate.pendingStore {
                 self?.attachAndShow(store: store)
@@ -61,6 +69,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             notch = NotchPanelController(store: store)
         }
         notch?.show()
+        // Screenshot/debug aid: AGENTDOCK_START_EXPANDED=1 opens the island expanded.
+        if ProcessInfo.processInfo.environment["AGENTDOCK_START_EXPANDED"] == "1" {
+            store.islandExpanded = true
+        }
     }
 }
 
@@ -92,5 +104,63 @@ struct NotchReviewCanvas: View {
             }
         }
         .onAppear { store.startPolling() }
+    }
+}
+
+/// Launch-at-login via SMAppService (macOS 13+). The system persists the state;
+/// we only remember whether we already did the one-time auto-registration.
+@MainActor
+final class LoginItem: ObservableObject {
+    static let shared = LoginItem()
+    private let log = Logger(subsystem: "dev.agentdock.AgentDock", category: "LoginItem")
+    private static let autoRegisteredKey = "didAutoRegisterLoginItem"
+
+    @Published private(set) var isEnabled: Bool = false
+
+    private init() { reload() }
+
+    func reload() {
+        let status = SMAppService.mainApp.status
+        isEnabled = (status == .enabled || status == .requiresApproval)
+        log.notice("Launch at Login status: \(status.rawValue, privacy: .public) (0=notRegistered 1=enabled 2=requiresApproval 3=notFound)")
+    }
+
+    func setEnabled(_ on: Bool) {
+        do {
+            if on { try SMAppService.mainApp.register() }
+            else { try SMAppService.mainApp.unregister() }
+        } catch {
+            log.error("Launch at Login \(on ? "register" : "unregister", privacy: .public) failed: \(error.localizedDescription, privacy: .public)")
+        }
+        reload()
+    }
+
+    func toggle() { setEnabled(!isEnabled) }
+
+    /// Turn launch-at-login on once, the first time the app runs from /Applications.
+    /// After that the user's choice (toggle) wins.
+    func registerOnFirstLaunchIfInstalled() {
+        let d = UserDefaults.standard
+        guard Bundle.main.bundlePath.hasPrefix("/Applications/"),
+              !d.bool(forKey: Self.autoRegisteredKey) else { reload(); return }
+        d.set(true, forKey: Self.autoRegisteredKey)
+        if SMAppService.mainApp.status != .enabled { setEnabled(true) } else { reload() }
+    }
+}
+
+/// Right-click menu shared by the collapsed and expanded island.
+struct IslandContextMenu: View {
+    @ObservedObject var store: StatusStore
+    @ObservedObject var loginItem = LoginItem.shared
+
+    var body: some View {
+        Toggle("This Mac Only (skip SSH)", isOn: $store.localOnly)
+        Toggle("Launch at Login", isOn: Binding(
+            get: { loginItem.isEnabled },
+            set: { loginItem.setEnabled($0) }
+        ))
+        Button("Refresh") { store.refresh() }
+        Divider()
+        Button("Quit AgentDock") { NSApp.terminate(nil) }
     }
 }

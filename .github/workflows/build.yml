@@ -20,7 +20,7 @@ jobs:
       - name: Zip app
         run: |
           cd native/build/Build/Products/Release
-          ditto -c -k --keepParent AgentStatusBar.app AgentDock.zip
+          ditto -c -k --keepParent AgentDock.app AgentDock.zip
       - uses: actions/upload-artifact@v4
         with:
           name: AgentDock

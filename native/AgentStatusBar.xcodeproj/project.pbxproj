@@ -36,7 +36,7 @@
 		A1000000000000000000000A /* StatusStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusStore.swift; sourceTree = "<group>"; };
 		A1000000000000000000000B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1000000000000000000000C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A90000000000000000000001 /* AgentStatusBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgentStatusBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A90000000000000000000001 /* AgentDock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgentDock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 
 		A1000000000000000000000D /* NotchIslandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchIslandView.swift; sourceTree = "<group>"; };
 		A1000000000000000000000E /* NotchPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanelController.swift; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 		A30000000000000000000002 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A90000000000000000000001 /* AgentStatusBar.app */,
+				A90000000000000000000001 /* AgentDock.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,7 +149,7 @@
 			);
 			name = AgentStatusBar;
 			productName = AgentStatusBar;
-			productReference = A90000000000000000000001 /* AgentStatusBar.app */;
+			productReference = A90000000000000000000001 /* AgentDock.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -286,7 +286,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.agentdock.AgentDock;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AgentDock;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -308,7 +308,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.agentdock.AgentDock;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AgentDock;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};

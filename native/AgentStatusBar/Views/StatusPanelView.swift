@@ -6,6 +6,7 @@ struct StatusPanelView: View {
 
     static let islandWidth: CGFloat = 340
     static let islandHeight: CGFloat = 98
+    static let pillHeight: CGFloat = 20
 
     private var orderedAgents: [AgentSnapshot] {
         Array(store.agents.prefix(6))
@@ -17,40 +18,69 @@ struct StatusPanelView: View {
                 Text("AgentDock")
                     .font(.system(size: 10, weight: .semibold))
                     .foregroundStyle(Color.white.opacity(0.45))
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .layoutPriority(0)
                 Spacer(minLength: 4)
                 Text(store.relativeRefresh)
                     .font(.system(size: 9, weight: .regular))
                     .foregroundStyle(Color.white.opacity(0.4))
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .layoutPriority(0)
                 Button {
                     store.localOnly.toggle()
                 } label: {
-                    HStack(spacing: 4) {
+                    HStack(spacing: 3) {
                         Image(systemName: store.localOnly ? "laptopcomputer" : "network")
                             .font(.system(size: 9, weight: .semibold))
                         Text(store.localOnly ? "This Mac" : "All Macs")
                             .font(.system(size: 10, weight: .semibold))
+                            .lineLimit(1)
+                            .fixedSize()
                     }
                     .foregroundStyle(Color.white.opacity(store.localOnly ? 0.95 : 0.7))
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 5)
+                    .padding(.horizontal, 7)
+                    .frame(height: Self.pillHeight)
                     .background(Capsule().fill(Color.white.opacity(store.localOnly ? 0.22 : 0.08)))
+                    .fixedSize()
                 }
                 .buttonStyle(.plain)
                 .help("Toggle SSH hosts on/off")
-                .padding(.leading, 8)
+                .layoutPriority(2)
+                .padding(.leading, 6)
                 Button {
                     onCollapse?()
                 } label: {
                     Text("Collapse")
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(.system(size: 10, weight: .semibold))
+                        .lineLimit(1)
+                        .fixedSize()
                         .foregroundStyle(Color.white.opacity(0.85))
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
+                        .padding(.horizontal, 8)
+                        .frame(height: Self.pillHeight)
                         .background(Capsule().fill(Color.white.opacity(0.14)))
+                        .fixedSize()
                 }
                 .buttonStyle(.plain)
-                .padding(.leading, 8)
+                .layoutPriority(2)
+                .padding(.leading, 4)
+                Button {
+                    NSApp.terminate(nil)
+                } label: {
+                    Image(systemName: "power")
+                        .font(.system(size: 9, weight: .bold))
+                        .foregroundStyle(Color.white.opacity(0.55))
+                        .frame(width: Self.pillHeight, height: Self.pillHeight)
+                        .background(Circle().fill(Color.white.opacity(0.08)))
+                        .contentShape(Circle())
+                }
+                .buttonStyle(.plain)
+                .help("Quit AgentDock")
+                .layoutPriority(2)
+                .padding(.leading, 4)
             }
+            .frame(height: Self.pillHeight)
             .padding(.horizontal, 12)
             .padding(.top, 8)
             .padding(.bottom, 4)
