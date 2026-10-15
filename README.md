@@ -1,5 +1,6 @@
 <img src="docs/icon.png" width="128" alt="AgentDock icon" align="right">
 
+
 # AgentDock
 
 **A tiny macOS notch island that shows which of your AI coding agents are actually working, on this Mac and on your other Macs.**
