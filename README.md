@@ -39,7 +39,7 @@ Agents with neither a process nor session files are hidden. The rest are sorted 
 
 Requires macOS 14+ and `python3` (system Python is fine; PyYAML is optional).
 
-**Prebuilt:** download `AgentDock.zip` from [Releases](https://github.com/jesselei1102-hue/agentdock/releases) (or the latest [Actions](https://github.com/jesselei1102-hue/agentdock/actions) build artifact), unzip it and drag **AgentDock.app** into **/Applications**.
+**Prebuilt:** download `AgentDock.zip` from the [latest release](https://github.com/jesselei1102-hue/agentdock/releases/latest), unzip it and drag **AgentDock.app** into **/Applications**. Requires macOS 14 or later.
 
 **From source** (Xcode 15+):
 
@@ -52,7 +52,7 @@ ditto build/Build/Products/Release/AgentDock.app /Applications/AgentDock.app
 codesign --force --deep -s - /Applications/AgentDock.app   # ad-hoc sign
 ```
 
-The app is unsigned, so on first launch right-click it and choose **Open** (or run `xattr -cr /Applications/AgentDock.app`).
+The app is ad-hoc signed but not notarized, so macOS blocks the first launch. Either run `xattr -cr /Applications/AgentDock.app` once, or try to open it, then go to **System Settings → Privacy & Security** and click **Open Anyway**.
 
 ## Open, quit and launch at login
 
